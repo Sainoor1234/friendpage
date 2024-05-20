@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make New Female Friends</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: lightblue;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            max-width: 800px;
+            margin: 20px auto; /* Center the container */
+        }
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+        }
+        .login-section, .blog-section {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+        }
+        .login-section {
+            display: flex;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .login-section form, .blog-section {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .search-bar:before {
+            content: '';
+            display: block;
+            height: 10px;
+            background-color: lightpink;
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .title {
+            margin-bottom: 40px;
+            transition: all 0.5s;
+            text-align: center;
+        }
+        .title-small {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        h2 {
+            margin-top: 20px;
+            text-align: center;
+        }
+        p {
+            font-size: 1.1em;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .nav-menu-box {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .nav-menu-box a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .nav-menu-box a:hover {
+            color: #0056b3;
+        }
+        .overview-section {
+            position: relative;
+            text-align: center;
+            color: white;
+            width: 100%;
+        }
+        .overview-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            opacity: 0.5;
+        }
+        .overview-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .blog-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .blog-images img {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 id="title" class="title">Make A Friend</h1>
+
+        <!-- Login Credentials -->
+        <div id="loginSection" class="login-section">
+            <h3>Login with Email and Password</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+        </div>
+
+        <!-- Blog Section -->
+        <div id="blogSection" class="blog-section">
+            <!-- Navigation Menu Box -->
+            <div class="nav-menu-box">
+                <a href="#" id="mapLink">Map</a>
+                <a href="#" id="addFriendLink">Add a Friend</a>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" class="form-control" id="search" placeholder="Search...">
+            </div>
+
+            <div class="overview-section">
+                <img src="istockphoto-1363888610-612x612.jpg" alt="Background Image">
+                <div class="overview-text">
+                    <h2>Overview</h2>
+                    <p>Welcome to our community! This platform is designed to help you make new female friends. You can browse through various profiles, join groups, and participate in discussions. Our goal is to foster a friendly and supportive environment where you can connect with like-minded individuals.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Simulate a login process
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('pwd').value;
+
+            // Simple email and password validation (for demonstration purposes)
+            if (email === "user@example.com" && password === "password") {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('blogSection').style.display = 'flex';
+
+                // Move the title up and change its size
+                document.getElementById('title').classList.add('title-small');
+            } else {
+                alert('Invalid email or password.');
+            }
+        });
+
+        // Navigation menu links (for demonstration purposes)
+        document.getElementById('mapLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('Map feature coming soon!');
+        });
+
+        document.getElementById('addFriendLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('Add a Friend feature coming soon!');
+        });
+    </script>
+</body>
+</html>
