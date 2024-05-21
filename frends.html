@@ -6,7 +6,30 @@
     <title>Make New Female Friends</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
+        body
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('istockphoto-1363888610-612x612.jpg'); /* Replace 'your-background-image.jpg' with the path to your image */
+            background-size: cover;
+            z-index: -1; /* Place the background behind the content */
+        }
+
+        #blogSection {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Add transparency to make the background image visible */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            position: relative; /* Make the container relative for absolute positioning */
+            z-index: 1; /* Ensure the content is above the background image */
+        }
+
+
+{
             background-color: lightblue;
             font-family: Arial, sans-serif;
         }
@@ -63,6 +86,34 @@
             flex-direction: column;
             align-items: center;
         }
+        #blogSection {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    #blogSection h3 {
+        margin-top: 20px;
+        font-size: 24px;
+    }
+
+    #blogSection p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+
+    #blogSection a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    #blogSection a:hover {
+        text-decoration: underline;
+    }
+
+
         .title-small {
             margin-top: 20px;
             font-size: 24px;
@@ -159,17 +210,25 @@
             <p><a href="#">Sign Up</a></p>
         </form>
     </div>
-
+    <div class="background-image"></div>
     <div id="blogSection">
-        <h2 id="title">Welcome to Friend Finder</h2>
-        <div class="search-bar">
-            <input type="text" class="form-control" id="search" placeholder="Search for friends...">
-            <div id="searchResults"></div>
-        </div>
-        <div id="friendsList">
-            <h3>Friends List</h3>
-            <div id="friendsContent"></div>
-        </div>
+    <h2 id="title">Welcome to Friend Finder</h2>
+    <p>This is the homepage of our Friend Finder application. You can use this platform to make new female friends, explore maps, and stay connected with your friends.</p>
+    <h3>About Us</h3>
+    <p>We are dedicated to creating a safe and friendly environment where women can connect with each other and build meaningful relationships.</p>
+    <h3>Contact Us</h3>
+    <p>If you have any questions or feedback, feel free to reach out to us at <a href="mailto:info@friendfinder.com">info@friendfinder.com</a>.</p>
+    <!-- Add more content here as needed -->
+    <div class="search-bar">
+        <input type="text" class="form-control" id="search" placeholder="Search for friends...">
+        <div id="searchResults"></div>
+    </div>
+    <div id="friendsList">
+        <h3>Friends List</h3>
+        <div id="friendsContent"></div>
+    </div>
+
+
         <div id="map"></div>
     </div>
 
