@@ -280,15 +280,16 @@
                 <input type="password" class="form-control" id="pwd" required>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
-            <p><a href="#">Sign Up</a></p>
+            <p><a href="#" id="signUpLink">Sign Up</a></p>
         </form>
     </div>
     <div class="background-image"></div>
-    <div id="blogSection">
+    <div id="blogSection" style="display:none;">
         <h2 id="title">Welcome to Friend Finder</h2>
         <p>This is the homepage of our Friend Finder application. You can use this platform to make new female friends, explore maps, and stay connected with your friends.</p>
         <h3>About Us</h3>
-        <p>We are dedicated to creating a safe and friendly environment where women can connect with each other and build meaningful relationships.</p>
+        <p>We are dedicated to helping you make new friends and stay connected with them. Our platform offers various features like searching for friends, viewing friends on a map, and sending SOS alerts.</p>
+        
         <div class="search-bar">
             <input type="text" id="search" placeholder="Search for friends...">
             <div id="searchResults"></div>
@@ -327,12 +328,45 @@
         </div>
     </div>
 
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="signUpForm">
+                        <div class="form-group">
+                            <label for="signUpName">Name:</label>
+                            <input type="text" class="form-control" id="signUpName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpEmail">Email:</label>
+                            <input type="email" class="form-control" id="signUpEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpPassword">Password:</label>
+                            <input type="password" class="form-control" id="signUpPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Friends array
         const friends = [
             { name: "Sumayah", details: "19, student, angel" },
             // Add more friends if needed
         ];
+
+        let users = [];
 
         let map;
         let markers = []; // This will hold the map markers
@@ -350,8 +384,8 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('pwd').value;
 
-            // Simple email and password validation (for demonstration purposes)
-            if (email === "user@example.com" && password === "password") {
+            const user = users.find(user => user.email === email && user.password === password);
+            if (user) {
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('blogSection').style.display = 'flex';
 
@@ -367,12 +401,18 @@
             event.preventDefault();
             document.getElementById('map').style.display = 'block';
             initMap();
-            });
+        });
 
         // Show the "Add a Friend" modal when the link is clicked
         document.getElementById('addFriendLink').addEventListener('click', function (event) {
             event.preventDefault();
             $('#addFriendModal').modal('show');
+        });
+
+        // Show the "Sign Up" modal when the link is clicked
+        document.getElementById('signUpLink').addEventListener('click', function (event) {
+            event.preventDefault();
+            $('#signUpModal').modal('show');
         });
 
         // Handle the submission of the add friend form
@@ -383,6 +423,23 @@
 
             addFriend(name, location);
             $('#addFriendModal').modal('hide');
+        });
+
+        // Handle the submission of the sign up form
+        document.getElementById('signUpForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const name = document.getElementById('signUpName').value;
+            const email = document.getElementById('signUpEmail').value;
+            const password = document.getElementById('signUpPassword').value;
+
+            users.push({ name, email, password });
+            $('#signUpModal').modal('hide');
+
+            alert('Sign up successful! Please log in.');
+
+            // Redirect to login page
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('blogSection').style.display = 'none';
         });
 
         // Add a friend to the list and map
@@ -448,49 +505,25 @@
             }
 
             // Show search results
-            searchResultsDiv.style.display = filteredFriends.length > 0 ? 'block' : 'none';
+            searchResultsDiv.style.display = filteredFriends.length ? 'block' : 'none';
         }
 
-        // Event listener for search input
+        // Event listener for the search input
         document.getElementById('search').addEventListener('input', function (event) {
-            const query = event.target.value.toLowerCase();
+            const query = event.target.value.toLowerCase().trim();
             displaySearchResults(query);
         });
 
-        // Event delegation for click on friend result
-        document.getElementById('searchResults').addEventListener('click', function (event) {
-            const target = event.target.closest('.friend-result');
-            if (target) {
-                alert(`Clicked on ${target.querySelector('strong').textContent}`);
-                // Add your logic here to handle clicking on a friend result
+        // Hide the search results when clicking outside of it
+        document.addEventListener('click', function (event) {
+            const searchResultsDiv = document.getElementById('searchResults');
+            if (!searchResultsDiv.contains(event.target) && event.target.id !== 'search') {
+                searchResultsDiv.style.display = 'none';
             }
         });
-
-        // Handle the "Friends" link click
-        document.getElementById('friendsLink').addEventListener('click', function (event) {
-            event.preventDefault();
-            updateFriendsList();
-            document.getElementById('friendsList').style.display = 'block';
-        });
-
-        // Handle the "SOS" button click
-        document.getElementById('sos').addEventListener('click', function () {
-            if (friends.length > 0) {
-                let alertMessage = "SOS Alert sent to:\n";
-                friends.forEach(function (friend) {
-                    alertMessage += friend.name + "\n";
-                });
-                alert(alertMessage);
-            } else {
-                alert('No friends to send SOS alert to.');
-            }
-        });
-
-        // Initialize the map when the page loads
-        window.onload = function () {
-            initMap();
-        }
     </script>
+
+    <!-- Include Bootstrap and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
