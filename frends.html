@@ -396,6 +396,94 @@
                 alert('Invalid email or password.');
             }
         });
+        <!-- CHATBOX COMPONENT -->
+<div id="chatbox" style="
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+">
+    <div style="
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        text-align: center;
+    ">Chat with Friends</div>
+    <div id="chatMessages" style="
+        padding: 10px;
+        height: 300px;
+        overflow-y: auto;
+        font-size: 14px;
+        color: #333;
+    "></div>
+    <input id="chatInput" type="text" placeholder="Type a message..." style="
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-top: 1px solid #ccc;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    "/>
+</div>
+
+<!-- CHAT BUTTON -->
+<button onclick="toggleChat()" style="
+    position: fixed;
+    bottom: 20px;
+    right: 340px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 9999;
+">Chat</button>
+
+<!-- CHAT SCRIPT -->
+<script>
+    function toggleChat() {
+        const chatbox = document.getElementById("chatbox");
+        chatbox.style.display = (chatbox.style.display === "none") ? "block" : "none";
+    }
+
+    document.getElementById("chatInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            const input = event.target.value;
+            if (input.trim() !== "") {
+                const messageDiv = document.createElement("div");
+                messageDiv.textContent = "You: " + input;
+                document.getElementById("chatMessages").appendChild(messageDiv);
+                event.target.value = "";
+                document.getElementById("chatMessages").scrollTop = document.getElementById("chatMessages").scrollHeight;
+            }
+        }
+    });
+</script>
+
+<!-- LOGOUT UPDATE SCRIPT -->
+<script>
+    document.getElementById("logoutLink").addEventListener("click", function(event) {
+        event.preventDefault();
+        if (confirm("Are you sure you want to logout?")) {
+            // Reset UI to login state
+            document.getElementById("loginSection").style.display = 'block';
+            document.getElementById("blogSection").style.display = 'none';
+            document.getElementById("map").style.display = 'none';
+            document.getElementById("friendsList").style.display = 'none';
+        }
+    });
+</script>
+
 
         // Show the map when the "Map" link is clicked
         document.getElementById('mapLink').addEventListener('click', function (event) {
